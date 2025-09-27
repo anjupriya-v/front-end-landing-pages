@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Pellets</title>
+    <link rel="stylesheet" href="./Css/Style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" >
+</head>
+<body onload='document.form1.text1.focus()'>
+ 
+  <div id="app">
+    <nav class="navbar navbar-expand-md navbar-dark  fixed-top" style="background-color: black;padding:4px">
+        <a class = "navbar-brand" href = "#">
+               <img class="brandImage" src = "https://server1.cbdbene.com//Footer-Logo.png" 
+                  style = "padding-left: 35%;" alt = "">
+            </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link navbar-link"  style="text-align: center; font-size: 1rem;" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link navbar-link" style="text-align: center;font-size: 1rem" href="#" data-toggle="modal" data-target="#modalAboutForm">About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link navbar-link" style="text-align: center;font-size: 1rem" href="#" data-toggle="modal" data-target="#modalContactForm">Contact</a>
+              </li>
+
+                
+            </ul>
+            <ul class="navbar-nav" style="text-align: center;">
+              <li class="nav-item">
+                <div class="dropdown" >
+               <a href="#" class="nav-link navbar-link dropdown-toggle" data-toggle="dropdown" style="text-align: center;"><i  style="color: white;" class=" fa fa-user"></i></a>
+               <ul  class="dropdown-menu   dropdown-menu-right mt-2"  >
+                <li class="px-3 py-2">
+                  <form id="loginForm" style="display: block;" name="form1" class="form" role="form">
+                       <div class="form-group">
+                           <input id="loginEmailInput" placeholder="Email" class="form-control form-control-sm" name="text1" type="text" required="">
+                       </div>
+                       <div class="form-group">
+                           <input id="loginPasswordInput" placeholder="Password" class="form-control form-control-sm" type="password" required="">
+                       </div>
+                       <div class="form-group">
+                           <button type="submit" name="submit" onclick="ValidateEmail(document.form1.text1);return false" class="btn btn-dark btn-block">Login</button>
+                       </div>
+                       <div class="form-group text-center">
+                           <small><a href="#" data-toggle="modal" data-target="#modalPassword">Forgot password?</a></small>
+                           <br/>
+                           <small><a href="javascript:registerFunction()">New User?</a></small>
+                       </div>
+                   </form>
+                   <form style="display:none;"id="registerForm" class="form" role="form">
+                    <div class="form-group">
+                        <input id="firstNameInput" placeholder="First Name" class="form-control form-control-sm" type="text" required="">
+                    </div>
+                    <div class="form-group">
+                        <input id="lastNameInput" placeholder="Last Name" class="form-control form-control-sm" type="text" required="">
+                    </div>
+                    <div class="form-group">
+                      <input id="registerEmailInput" placeholder="Email" class="form-control form-control-sm" type="text" required="">
+                  </div>
+                  <div class="form-group">
+                      <input id="registerPasswordInput" placeholder="Password" class="form-control form-control-sm" type="password" required="">
+                  </div>
+                  <div class="form-group">
+                    <input id="confirmPasswordInput" placeholder="ReEnter Password" class="form-control form-control-sm" type="password" required="">
+                </div>
+                    <div class="form-group">
+                        <button type="submit" onclick="accountRegister();return false;" class="btn btn-dark btn-block">Register</button>
+                    </div>
+                    <div class="form-group text-center">
+                       
+                        <small><a href="javascript:loginFunction()">Already Have a Account?</a></small>
+                    </div>
+                </form>
+
+
+               </li>
+              </ul>
+              </div>
+              
+            </li>
+            
+              <li class="nav-item">
+              <a href="javascript:openNav()" class="nav-link navbar-link" style="text-align: center;"><i style="color: white" class=" fa fa-shopping-bag "></i></a>
+              <div id="myNav" class="overlay">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <div class="overlay-content">
+                  <img src="./Css/icons8-shopping-bag-64.png" alt="shopping bag"/>
+                  
+             
+                  <h1 >Your Cart is Empty</h1>
+                
+                  <div id = "contact-wrapper">
+                    <a href="Index.html" style="text-decoration: none;"><h3 id="login">Login to Purchase</h3></a>
+                  </div>
+                  </div>
+                </div>
+              </div>
+              </li>
+              
+          </ul>
+            
+        </div>
+      
+    </nav>
+
+    <div id="modalPassword" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Forgot password</h2>
+                <button type="button" class="close font-weight-light" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <p>Reset your password..</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                <button class="btn btn-primary"  data-dismiss="modal" >Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="modal fade" id="modalAboutForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Bené CBD Pet Pellets</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <p style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;text-align: justify;">Here you can purchase the Bene CBD Pet Pellet Product.This Product is naturally made from CBD.This Bené Pet Pellets will give more nutrients to your pets. </p>
+        <span style="font-weight: bolder;">Make use of our product for your pet’s good health</span>
+       <br/>
+       <br/>
+        <h6>Website Developed by <b>Anju Priya V</b></h6>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    </div>
+    
+  </div>
+</div>
+
+</div> 
+<div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Contact With us</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-2">
+          <i class="fa fa-user prefix grey-text"></i>
+          
+          <label data-error="wrong" data-success="right" for="form34">Your name</label>
+          <input type="text" id="form34" class="form-control validate">
+        </div>
+
+        <div class="md-form mb-2">
+          <i class="fa fa-envelope prefix grey-text"></i>
+          <label data-error="wrong" data-success="right" for="form29">Your email</label>
+          <input type="email" id="form29" class="form-control validate">
+         
+        </div>
+
+
+        <div class="md-form mb-2">
+          <i class="fa fa-pencil prefix grey-text"></i>
+          
+          <label data-error="wrong" data-success="right" for="form8">Your message</label>
+          <textarea type="text" id="form8" class="md-textarea form-control" rows="4"></textarea>
+        </div>
+
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button class="btn btn-secondary">Send <i class="fa fa-paper-plane-o ml-1"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div id="backgroundImage">
+
+    <h1 id="mainHeading">Bené CBD Pet Pellets</h1>
+
+
+  </div>
+  <div id="content"  >
+  <div class="container" style="margin-top: 2%;" >
+    <div class="row">
+      
+        <div class="card" style="border-radius: 13px;">
+          <div class="card-body">
+ 
+    <h3 style="padding-top: 2%;">Hello Everyone,</h3>
+    <h6>All over the world, pets are treated as an extended family. We treat our fur friends just like our babies and do not make any compromise with their health, wellness or nutrition. 
+    One of the best ways to ensure your pet’s all-round health is to utilise CBD products specially designed to cater to your pet’s needs. 
+    </h6>
+    <h3>CBD-An Overview</h3>
+    <br/>
+    <div class="card">
+      <div class="row no-gutters">
+          <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-xs-12">
+              <img class="card-img img-responsive" src=" https://coloradocannabistours.com/wp-content/uploads/2016/06/can20.jpg" style=" object-fit: cover;height:360px;"alt="CBDCard">
+          </div>
+          <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-xs-12 ">
+         
+              <h4 style="text-align: center;margin-top: 2%;">Cannabidiol</h4>
+            
+              <div class="card-body">
+                <p class="card-text" style="text-align: justify">CBD, scientifically known as cannabidiol is part of the cannabinoid family. It is derived from plants such as Cannabis sativa and Cannabis indica.  From the raw Cannabis plants a variety of Phyto cannabinoids can be obtained, one of them being CBD. Subjecting the cannabinoid extract to specific processes yields CBD oil, which is later incorporated into various dosage forms.</p>
+
+     
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <details style="padding-top: 3%;">
+      <summary>Cannabinoid family Types</summary>
+        <p class="CBDTypes">a)Phyto cannabinoids, which are derived from plants</p>
+        <p class="CBDTypes">b)Endocannabinoids, which are naturally present in humans</p>
+  </details> 
+   
+  <h6>We, at Bené, make sure that the CBD oil is obtained via the carbon di oxide extraction process, which is the most efficient process and helps remove any and all harmful chemicals such as THC.</h6>  
+      <h3>Endocannabinoids and their execution</h3>
+      <h6>In most mammals including humans, cats and dogs, there is a pre-existing mechanism to maintain homeostasis. The mechanism we are talking about is the Endocannabinoid System (ECS).</h6>
+      <details>
+        <summary>Endocannabinoid functions</summary>
+        <ul>
+           <li>Sleep – wake cycle</li>
+           <li>Appetite</li>
+           <li>Behavioural patterns</li>
+           <li>Mood</li>
+        </ul>
+      </details> 
+      <h6 >Few important endocannabinoids are 2-AG, EAE and anandamide.</h6> 
+      <h3>The biology behind CBD action</h3>
+      <ul>
+          <li style="padding-top: 2%;">Your pet’s nervous system has certain receptors which are in collaboration with the endocannabinoids.</li>
+          <li>Research has proved that these same receptors can also interact with Phyto cannabinoids such as CBD to bring satisfactory effects.</li>
+          <li>For instance, CBD can bind with the CB1 receptor in the brain and regulate sleeping and behavioural patterns. CBD can also bind with the CB2 receptor and help in reducing pain and inflammation.</li>
+          <li>Sometimes, CBD can also influence the activity of endocannabinoid, anandamide which takes up serotonin, the hormone responsible for elevating happiness levels.</li>    
+      </ul>
+     
+      <br/>
+      <h1 style="text-align: center;">Our Product</h1>
+      <br/>
+      <div class="card">
+        <div class="card-body">
+      <div class="container">
+        <div class="row">
+       
+        <img class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-xs-12 " style="object-fit: cover;" src="https://admin.cbdbene.com/var/www/cbdbene_3rde/cbdbene/public\images\uploads\cbd-pets-petpellets-1020mg-cbdbene-1610645871849.webp" alt="product"/>
+        <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-xs-12 ">
+          <h3 style="text-align: center;">Bené CBD Pet Pellets</h3>
+          <hr/>
+          <p>Full spectrum CBD oil with plant protein, insoluble fiber and complex carbohydrates. Great for pocket pets, birds and rabbits.</p>
+          <h6 style="font-weight: bolder;">What is it?</h6>
+          <p>For small animals, start with a single pellet and break it further into pieces if needed.</p>
+          <h6 style="font-weight: bolder;">Key Ingredients</h6>
+          <p>Organically grown hemp extracted CBD Oil, Myco Curb®, Apple Ade.</p>
+          
+          <div class="dropdown dropleft">
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle">Product Information</a>
+            
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalProductInformation">Ingredients</a>
+              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modalHowToUse">How To Use</a>
+              <a class="dropdown-item" href="#"  data-toggle="modal" data-target="#modalReviews">Reviews</a>
+              <a class="dropdown-item" href="#"  data-toggle="modal" data-target="#modalFAQS">FAQS</a>
+
+            </div>
+          </div>
+      
+        
+        <h1 style="font-weight: bolder;">$4.99</h1>
+        <button class="btn btn-dark" data-toggle="modal" data-target="#modalAddToCart" >Add to cart</button>
+        <div class="modal fade" id="modalHowToUse" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">How To Use</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body mx-3">
+                <h4>Direction</h4>
+                <p>Rabbits: Take 1/4 level</p>
+                <h4>Storage</h4>
+                <p style="text-transform: capitalize;">
+                 Store At Room Temperature.Don't Expose to the Excessive heat or Moisture </p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            
+          </div>
+        </div>
+        
+        </div>
+        <div class="modal fade" id="modalReviews" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Reviews</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body mx-3">
+                <h4>We don't have any reviews for this product.</h4>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            
+          </div>
+        </div>
+        
+        </div>
+        <div class="modal fade" id="modalFAQS" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">FAQS</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body mx-3">
+               <h4>We don't have any faq's for this product.</h4>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            
+          </div>
+        </div>
+        
+        </div>
+          <div class="modal fade" id="modalProductInformation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Ingredients</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body mx-3">
+                <p>Total CBD - 1020 mg
+                 <p> CBD/ unit - 4.25 mg</p>
+                  <p>Total Servings - 240</p>
+                  <p>
+                  Servings Size - 0</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            
+          </div>
+        </div>
+        
+        </div>
+          <div class="modal fade" id="modalAddToCart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          aria-hidden="true" >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header text-center">
+
+               <h4 >Hello User!</h4>
+              </div>
+              <div class="modal-body mx-3">
+                
+                  <p>Please Make a Login to Purchase</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+            </div>
+            
+          </div>
+        </div>
+        
+        </div> 
+        
+      </div>
+    </div>
+    
+    </div> 
+        </div>
+      </div>
+      <br/>
+<h4 style="text-align: center;font-weight:500; padding-top: 3%;">Full spectrum CBD oil with plant protein, insoluble fiber and complex carbohydrates. Great for pocket pets, birds and rabbits.</h4>
+
+<div class="container py-2 mt-4 mb-4">
+
+  <div class="row no-gutters">
+    <div class="col-sm"> </div>
+   
+    <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
+      <div class="row h-50">
+        <div class="col">&nbsp;</div>
+        <div class="col">&nbsp;</div>
+      </div>
+      <h5 class="m-2">
+        <span class="badge badge-pill bg-light border">&nbsp;</span>
+      </h5>
+      <div class="row h-50">
+        <div class="col border-right">&nbsp;</div>
+        <div class="col">&nbsp;</div>
+      </div>
+    </div>
+   
+    <div class="col-sm py-2">
+      <div class="card">
+        <div class="card shadow">
+        <div class="card-body">
+       
+          <h4 class="card-title ">For birds, rabbits and pocket pets</h4>
+          <p class="card-text" style="text-align: justify;">Can easily be administered as pellets with their meals. For smaller animals please start with the tiniest piece possible.</p>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="row no-gutters">
+    <div class="col-sm py-2">
+      <div class="card shadow">
+        <div class="card-body">
+      
+          <h4 class="card-title">Hemp Meal</h4>
+          <p class="card-text" style="text-align: justify;">Contains 20% plant protein, 30% insoluble fiber and 50% complex carbohydrates. Sterilized, sieved, and blended for safety, efficacy, and consistency.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
+      <div class="row h-50">
+        <div class="col border-right">&nbsp;</div>
+        <div class="col">&nbsp;</div>
+      </div>
+      <h5 class="m-2">
+        <span class="badge badge-pill bg-light border">&nbsp;</span>
+      </h5>
+      <div class="row h-50">
+        <div class="col border-right">&nbsp;</div>
+        <div class="col">&nbsp;</div>
+      </div>
+    </div>
+    <div class="col-sm"> </div>
+  </div>
+  <div class="row no-gutters">
+    <div class="col-sm"> </div>
+    <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
+      <div class="row h-50">
+        <div class="col border-right">&nbsp;</div>
+        <div class="col">&nbsp;</div>
+      </div>
+      <h5 class="m-2">
+        <span class="badge badge-pill bg-light border">&nbsp;</span>
+      </h5>
+      <div class="row h-50">
+        <div class="col border-right">&nbsp;</div>
+        <div class="col">&nbsp;</div>
+      </div>
+    </div>
+    <div class="col-sm py-2">
+      <div class="card">
+        <div class="card shadow">
+        <div class="card-body">
+          
+          <h4 class="card-title">How to store</h4>
+          <p class="card-text" style="text-align: justify;">Store in a cool, dry place away from humidity, heat, and direct light. Keep out of reach of children.</p>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+  <div class="row no-gutters">
+    <div class="col-sm py-2">
+      <div class="card">
+        <div class="card shadow">
+        <div class="card-body">
+         
+          <h4 class="card-title">THC</h4>
+          <p class="card-text" style="text-align: justify;">0.0% THC</p>
+          <p class="card-text" style="text-align: justify;">you don't have to be high in a psychoactive way.</p>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
+      <div class="row h-50">
+        <div class="col border-right">&nbsp;</div>
+        <div class="col">&nbsp;</div>
+      </div>
+      <h5 class="m-2">
+        <span class="badge badge-pill bg-light border">&nbsp;</span>
+      </h5>
+      <div class="row h-50">
+        <div class="col">&nbsp;</div>
+        <div class="col">&nbsp;</div>
+      </div>
+    </div>
+    <div class="col-sm"> </div>
+  </div>
+
+</div>
+
+<h3>Will my pet experience a "high" state?</h3>
+<ul>
+  <li>Cannabidiol, on its own, is incapable of producing any ‘high’ or illusionary state in humans or pets. With regards to cannabinoids, it is the chemical, delta-9-tetrahydrocannabinol (THC), which is responsible for producing the ‘high’ state.</li>
+  <li>At Bené, we abide by all legal frameworks with regards to CBD. With this in mind we make sure that all our CBD products contain 0.0% of THC in them. Thus, the chances of your pet being ‘high’ after consuming a Bené product remain 0.0%!</li>
+</ul>
+<h3>Why should my pet take these Pellets?
+</h3>
+<h6>Coming to the most important question, what is the use of these pellets for your fur friend?</h6>
+<h6 style="padding-top: 1%;">Like humans, most pets experience common body issues at regular intervals or sometimes daily.</h6>
+<div style="padding-top: 5%;">
+ <div class="container">
+   <div class="row">
+    <div class="card card-block col-lg-4" style="margin-bottom:2%;padding-right: 4%;padding-top: 2%;">
+      <h4 class="card-title"style="text-align: center;">Stress,anxiety and aggression</h4>
+      <ul>
+          <li style="list-style-type:disc ;text-align: justify;">Most pets tend to have changing mood behavioural patterns. Your pet may not be able to express it specifically, however their actions point out that something’s amiss. Aggression and anxiety are common at certain stages, such as reproductive stages in your pets.</li>
+      </ul>
+    </div>
+    <div class="card card-block col-lg-4" style="margin-bottom:2%;padding-right: 4%;padding-top: 2%;">
+      <h4 class="card-title" style="text-align: center;">Nutrition and fitness</h4>
+      <ul>
+         <li style="list-style-type: disc;text-align: justify">Pets, mainly dogs, are incapable of producing essential fatty acids such omega 3 and omega 6. It has been found that consumption of CBD pellets along with daily diet can help in promotion of these fatty acids and overall development of the dog.</li>
+      </ul>
+    
+    </div>
+    <div class="card card-block col-lg-4 "style="margin-bottom:2%;padding-right: 4%;padding-top: 2%;">
+      <h4 class="card-title" style="text-align: center;">Sleep</h4>
+      <ul>
+          <li style="list-style-type: disc;text-align: justify">Pets can get extremely timid and due to that reason; they can lose out on sleep and face the cruel insomnia. 
+              </li>
+          <li style="list-style-type: disc;">CBD pellets helps in relaxing their nerves and is also capable of inducing required amount of sleep.</li>
+      </ul>
+    </div>
+
+</div>
+</div>
+</div>
+<h3 style="margin-top:2%;">Utilising the right amount</h3>
+<ul>
+    <li>CBD,like other supplements should be taken in optimum amount. Too much can cause varying side effects while too less will defeat the purpose of its consumption. </li>
+    <li>The right amount of CBD pellets depends on the breed of your pet. Frankly speaking, larger breeds will require greater amount of the drug, while smaller breeds will need a fairly lesser amount</li>
+    <li>At Bene, we produce CBD pellets with a bottle having a total of 1020mg of CBD with 4.25mg of CBD per unit.</li>
+</ul>
+<h3>How does my pets use these pellets?</h3>
+<ul>
+  <li>After understanding the right amount, the prescribed number of pellets should be taken as part of diet. For pets of a smaller breed, the pellets maybe broken for an easier consumption.</li>
+  <li>After understanding the right amount, the prescribed number of pellets should be taken as part of diet. For pets of a smaller breed, the pellets maybe broken for an easier consumption.</li>
+</ul>
+<h4 style="text-align: center;padding-top: 4%;">Experience Our Topicals</h4>
+<div class="container" style="margin-top: 3%;">
+  <div class="row">
+    <div class="col-12 col-md-8 offset-md-2">
+      
+      <ul class="list-group" >
+        <li class="list-group-item" style="text-align: center;">Bené CBD Facial Masque (200mg)</li>
+        <li class="list-group-item" style="text-align: center;">Bené CBD Massage Oil (1000mg)</li>
+        <li class="list-group-item" style="text-align: center;">Bené CBD Relief Balm (500mg)</li>
+        <li class="list-group-item" style="text-align: center;">Bené CBD Body Cream (200mg)</li>
+        <li class="list-group-item" style="text-align: center;">Bené CBD Sheet Mask (20mg)</li>
+        <li class="list-group-item" style="text-align: center;">Bené CBD Freeze Rub (1500mg)</li>
+        <li class="list-group-item" style="text-align: center;">Bené CBD Relief Roll on (500mg)</li>
+        <li class="list-group-item" style="text-align: center;">Bené CBD Body Butter (400mg)</li>
+
+      </ul>
+    </div>
+  </div>
+</div>
+<h3 style="text-align: center; margin-top: 4%;">Our Other Products</h3>
+
+<section class="pt-5 pb-5">
+  <div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h4 class="mb-3">Accompany With</h4>
+        </div>
+        <div class="col-6 text-right">
+            <a class="btn btn-dark mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
+                <i class="fa fa-arrow-left"></i>
+            </a>
+            <a class="btn btn-dark mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">
+                <i class="fa fa-arrow-right"></i>
+            </a>
+        </div>
+        <div class="col-12">
+            <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <div class="row">
+
+                            <div class="col-md-4 mb-3">
+                                <div class="card" id="cardHeight">
+                                    <img class="img-fluid" alt="100%x280" src="./Css/Image_one.PNG">
+                                    <div class="card-body">
+                                        <h4 class="card-title" id="cardTitle">Bené CBD Relief Roll On</h4>
+                                        <p class="card-text" id="cardQuantity">500mg</p>
+                                        <div class="container">
+                                          <div class="row">
+                                            <div class="col text-center">
+                                              <button class="btn btn-dark" data-toggle="modal" data-target="#modalAddToCart">Add To Cart</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="card"  id="cardHeight">
+                                    <img class="img-fluid" alt="100%x280" src="./Css/Image_two.png">
+                                    <div class="card-body">
+                                        <h4 class="card-title" id="cardTitle">Bené CBD chocolate</h4>
+                                        <p class="card-text" id="cardQuantity">500mg</p>
+                                        <div class="container">
+                                          <div class="row">
+                                            <div class="col text-center">
+                                              <button class="btn btn-dark" data-toggle="modal" data-target="#modalAddToCart">Add To Cart</button>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="card"  id="cardHeight">
+                                    <img class="img-fluid" alt="100%x280" src="./Css/Image_three.png">
+                                    <div class="card-body">
+                                      <h4 class="card-title" id="cardTitle">Bené CBD Coffee</h4>
+                                      <p class="card-text" id="cardQuantity">500mg</p>
+                                      <div class="container">
+                                        <div class="row">
+                                          <div class="col text-center">
+                                            <button class="btn btn-dark" data-toggle="modal" data-target="#modalAddToCart">Add To Cart</button>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row">
+
+                            <div class="col-md-4 mb-3">
+                                <div class="card" id="cardHeight">
+                                    <img class="img-fluid" alt="100%x280" src="./Css/Image_four.png">
+                                    <div class="card-body">
+                                      <h4 class="card-title" id="cardTitle">Bené CBD Massage Oil</h4>
+                                      <p class="card-text" id="cardQuantity">1000mg</p>
+                                      <div class="container">
+                                        <div class="row">
+                                          <div class="col text-center">
+                                            <button class="btn btn-dark" data-toggle="modal" data-target="#modalAddToCart">Add To Cart</button>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="card" id="cardHeight">
+                                    <img class="img-fluid" alt="100%x280" src="./Css/Image_five.png">
+                                    <div class="card-body">
+                                      <h4 class="card-title" id="cardTitle">Bené CBD Oil</h4>
+                                      <p class="card-text" id="cardQuantity">300mg</p>
+                                      <div class="container">
+                                        <div class="row">
+                                          <div class="col text-center">
+                                            <button class="btn btn-dark" data-toggle="modal" data-target="#modalAddToCart">Add To Cart</button>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="card" id="cardHeight">
+                                    <img class="img-fluid" alt="100%x280" src="./Css/Image_six.png">
+                                    <div class="card-body">
+                                      <h4 class="card-title" id="cardTitle">Bené CBD Equine Pellets</h4>
+                                      <p class="card-text" id="cardQuantity">2040mg</p>
+                                      <div class="container">
+                                        <div class="row">
+                                          <div class="col text-center">
+                                            <button class="btn btn-dark" data-toggle="modal" data-target="#modalAddToCart">Add To Cart</button>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row">
+
+                            <div class="col-md-4 mb-3">
+                                <div class="card" id="cardHeight">
+                                    <img class="img-fluid" alt="100%x280" src="./Css/Image_seven.png">
+                                    <div class="card-body">
+                                      <h4 class="card-title" id="cardTitle">Bené Pets CBD Oil</h4>
+                                      <p class="card-text" id="cardQuantity">300mg</p>
+                                      <div class="container">
+                                        <div class="row">
+                                          <div class="col text-center">
+                                            <button class="btn btn-dark" data-toggle="modal" data-target="#modalAddToCart">Add To Cart</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="card" id="cardHeight">
+                                    <img class="img-fluid" alt="100%x280" src="./Css/Image_eight.png">
+                                    <div class="card-body">
+                                      <h4 class="card-title" id="cardTitle">Bené CBD Gummies</h4>
+                                      <p class="card-text" id="cardQuantity">300mg</p>
+                                      <div class="container">
+                                        <div class="row">
+                                          <div class="col text-center">
+                                            <button class="btn btn-dark" data-toggle="modal" data-target="#modalAddToCart">Add To Cart</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="card" id="cardHeight">
+                                    <img class="img-fluid" alt="100%x280" src="./Css/Image_nine.png">
+                                    <div class="card-body">
+                                      <h4 class="card-title" id="cardTitle">Bené CBD Gel Capsules</h4>
+                                      <p class="card-text" id="cardQuantity">750mg</p>
+                                      <div class="container">
+                                        <div class="row">
+                                          <div class="col text-center">
+                                            <button class="btn btn-dark" data-toggle="modal" data-target="#modalAddToCart">Add To Cart</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                    </div>
+                            <div class="carousel-item">
+                              <div class="row">
+      
+                            <div class="col-md-4 mb-3">
+                              <div class="card" id="cardHeight">
+                                  <img class="img-fluid" alt="100%x280" src="./Css/Image_ten.png">
+                                  <div class="card-body"> 
+                                    <h4 class="card-title" id="cardTitle">Bené CBD Body Butter</h4>
+                                    <p class="card-text" style="text-align: center;" id="cardPrice">400mg</p>
+                                    <div class="container">
+                                      <div class="row">
+                                        <div class="col text-center">
+                                          <button class="btn btn-dark" data-toggle="modal" data-target="#modalAddToCart">Add To Cart</button>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-md-4 mb-3">
+                            <div class="card" id="cardHeight">
+                                <img class="img-fluid" alt="100%x280" src="./Css/Image_eleven.png">
+                                <div class="card-body">
+                                  <h4 class="card-title" id="cardTitle">Bené CBD Sheet Mask</h4>
+                                  <p class="card-text" id="cardQuantity">20mg</p>
+                                  <div class="container">
+                                    <div class="row">
+                                      <div class="col text-center">
+                                        <button class="btn btn-dark" data-toggle="modal" data-target="#modalAddToCart">Add To Cart</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                          <div class="card" id="cardHeight">
+                              <img class="img-fluid" alt="100%x280" src="./Css/Image_twelve.png">
+                              <div class="card-body">
+                                <h4 class="card-title" id="cardTitle">Bené CBD Freeze Rub</h4>
+                                <p class="card-text" id="cardQuantity">1500mg</p>
+                                <div class="container">
+                                  <div class="row">
+                                    <div class="col text-center">
+                                      <button class="btn btn-dark" data-toggle="modal" data-target="#modalAddToCart">Add To Cart</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+                      </div>
+                      
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+
+
+
+
+
+      </div>
+      </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div>
+
+
+<footer class="mainfooter" role="contentinfo">
+  <div class="footer-middle">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-sm-6">
+
+        <div class="footer-pad">
+          <h4>Customer Service</h4>
+          <ul class="list-unstyled ">
+
+            <li><a href="#">My Account</a></li>
+            <li><a href="#">Shipping & Returns</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#modalFAQS">FAQ</a></li>
+            <li><a href="" data-toggle="modal" data-target="#modalContactForm">Contact us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+
+        <div class="footer-pad">
+          <h4>Company</h4>
+          <ul class="list-unstyled ">
+            <li><a href="#">Track My Order</a></li>
+            <li><a href="#">Affiliate Program</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        
+        <div class="footer-pad">
+          <h4>Terms</h4>
+          <ul class="list-unstyled">
+            <li><a href="#">Privacy and cookies</a></li>
+            <li><a href="#">Accessibility</a></li>
+          </ul>
+        </div>
+      </div>
+      <br/>
+    	<div class="col-md-3 col-sm-6 ">
+    		<h4>Follow Us</h4>
+            <ul class="social-network social-circle">
+             <li><a href="https://facebook.com" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+             <li><a href="https://linkedin.com" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+            </ul>				
+		</div>
+    </div>
+    <br/>
+	<div class="row">
+		<div class="col-md-12 copy">
+			<p class="text-center">&copy; Copyright 2021 -Bene CBD Pet Pellets.  All rights reserved.</p>
+		</div>
+	</div>
+
+
+  </div>
+  </div>
+</footer>
+  
+    
+    
+    <script src="./Js/Script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+</body>
+</html>
