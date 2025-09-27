@@ -1,4 +1,4 @@
-# Full Background Image Landing Page
+# Full Background Video Landing Page
 
 ## Demo Video:
 
