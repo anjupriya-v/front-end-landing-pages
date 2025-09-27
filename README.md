@@ -18,7 +18,7 @@ git clone https://github.com/anjupriya-v/front-end-landing-pages.git
 ```
 
 ``` 
-git checkout --orphan full-bg-image-landing-page
+git checkout full-bg-image-landing-page
 ```
 
 - Open the HTML file in Browser.
