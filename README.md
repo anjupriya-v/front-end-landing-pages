@@ -4,7 +4,7 @@
 
 https://github.com/user-attachments/assets/77bd4eb4-2cea-4ea8-9e8e-6dac0b871ec3
 
-## Tech Stack Used
+## Tech Stacks Used
 - HyperText Markup Language (HTML)
 - Cascading Style Sheet (CSS)
 - Javascript (JS)
